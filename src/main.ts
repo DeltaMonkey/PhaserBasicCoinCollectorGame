@@ -2,34 +2,28 @@ import 'phaser';
 
 class PlayGame extends Phaser.Scene {
 
-    image: Phaser.GameObjects.Image;
-
-    constructor() {
-        super('PlayGame');
-    }
+    player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
 
     preload() {
-        this.load.image('logo', 'assets/phaser3_logo.png');
+        this.load.image('player', 'assets/monster.png', )
     }
 
     create() {
-        this.image = this.add.image(400, 300, 'logo');
+        this.player = this.physics.add.sprite(100, 100, 'player');
     }
 
     update() {
-        this.image.rotation += 0.01;
     }
 }
 
-let configObject: Phaser.Types.Core.GameConfig = {
-    scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        parent: 'thegame',
-        width: 800,
-        height: 600,
-    },
-    scene: PlayGame
-};
+const GameConfig: Phaser.Types.Core.GameConfig = {
+    width: 350,
+    height: 200,
+    backgroundColor: '#3498db',
+    scene: PlayGame, // The name of scene we created above
+    physics: { default: 'arcade' }, // The physics engine to use
+    parent: 'thegame', // Create the game inside div in the index.html <div id='thegame'>,
+    zoom: 2
+}
 
-new Phaser.Game(configObject);
+new Phaser.Game(GameConfig);
